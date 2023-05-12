@@ -60,5 +60,5 @@ jobs:
       - name: Plan
         run: terraform plan -out plan.tfplan -input=false
       #- name: Apply
-      #  if: ${{ github.ref_name == 'main' }}
-      #  run: terraform apply -input=false plan.tfplan
+        if: ${{ github.ref_name == 'main' }}
+        run: terraform apply -input=false plan.tfplan
