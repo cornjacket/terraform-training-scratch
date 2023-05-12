@@ -35,3 +35,31 @@ jobs:
         run: terraform init -input=false -backend=false
       - name: Validate configuration
         run: terraform validate
+
+  plan-apply:
+    name: Plan & Apply
+    needs: [validate]
+    runs-on: ubuntu-latest
+    #env:
+    #  AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+    #  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #  AWS_REGION: ${{ vars.AWS_REGION }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.4.5
+      - name: Initialize configuration
+        run: terraform init
+        #run: |
+        #  terraform init -input=false \
+        #    -backend-config="bucket=${{ vars.S3_BACKEND_BUCKET }}" \
+        #    -backend-config="key=${{ vars.S3_BACKEND_KEY }}" \
+        #    -backend-config="dynamodb_table=${{ vars.S3_BACKEND_DYNAMDB_TABLE }}"
+      - name: Plan
+        run: terraform plan -out plan.tfplan -input=false
+      #- name: Apply
+      #  if: ${{ github.ref_name == 'main' }}
+      #  run: terraform apply -input=false plan.tfplan
