@@ -59,6 +59,6 @@ jobs:
             -backend-config="dynamodb_table=${{ vars.S3_BACKEND_DYNAMDB_TABLE }}"
       - name: Plan
         run: terraform plan -out plan.tfplan -input=false
-      #- name: Apply
+      - name: Apply
         if: ${{ github.ref_name == 'main' }}
         run: terraform apply -input=false plan.tfplan
