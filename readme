@@ -1,0 +1,4 @@
+# the vm module doesn't output it public ip address so I had to grab it by going to the s3 backend file so that I could ssh into it.
+# maybe the module does output it and I need to connect it to my root level tf.
+
+ssh -v -i ./mykey ubuntu@54.167.140.50
