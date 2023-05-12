@@ -1,6 +1,6 @@
 terraform {
   # Partial backend configuration.
-  #backend "s3" {}
+  backend "s3" {}
   #backend "s3" {
   #  # This may not be the correct name if we destroy the s3 bucket and then later re-create it.
   #  bucket         = "terraform-training20230509204229968600000001"
