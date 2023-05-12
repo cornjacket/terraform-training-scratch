@@ -3,17 +3,18 @@ terraform {
   #backend "s3" {}
   backend "s3" {
     # This may not be the correct name if we destroy the s3 bucket and then later re-create it.
-    bucket = "terraform-training20230509204229968600000001"
-    key    = "terraform/states/vm"
-    region = "us-east-1"
+    bucket         = "terraform-training20230509204229968600000001"
+    key            = "terraform/states/vm"
+    region         = "us-east-1"
     dynamodb_table = "terraform-training"
-    }
   }
+
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.0"
+
     }
   }
 }
@@ -21,7 +22,9 @@ terraform {
 
 
 # Configured via environment variables.
-# provider "aws" {}
+provider "aws" {
+  region = "us-east-1"
+}
 
 resource "aws_key_pair" "sudomateo" {
   key_name_prefix = "sudomateo"
